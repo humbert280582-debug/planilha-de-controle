@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedRecebimentosRouteImport } from './routes/_authenticated/recebimentos'
 import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
 import { Route as AuthenticatedVeiculosIndexRouteImport } from './routes/_authenticated/veiculos.index'
 import { Route as AuthenticatedVeiculosPlacaRouteImport } from './routes/_authenticated/veiculos.$placa'
@@ -36,6 +37,12 @@ const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   path: '/painel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRecebimentosRoute =
+  AuthenticatedRecebimentosRouteImport.update({
+    id: '/recebimentos',
+    path: '/recebimentos',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedVendasRoute = AuthenticatedVendasRouteImport.update({
   id: '/vendas',
   path: '/vendas',
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/recebimentos': typeof AuthenticatedRecebimentosRoute
   '/vendas': typeof AuthenticatedVendasRoute
   '/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
   '/veiculos/': typeof AuthenticatedVeiculosIndexRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/recebimentos': typeof AuthenticatedRecebimentosRoute
   '/vendas': typeof AuthenticatedVendasRoute
   '/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
   '/veiculos': typeof AuthenticatedVeiculosIndexRoute
@@ -76,6 +85,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/recebimentos': typeof AuthenticatedRecebimentosRoute
   '/_authenticated/vendas': typeof AuthenticatedVendasRoute
   '/_authenticated/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
   '/_authenticated/veiculos/': typeof AuthenticatedVeiculosIndexRoute
@@ -83,15 +93,29 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/painel' | '/vendas' | '/veiculos/$placa' | '/veiculos/'
+    | '/'
+    | '/auth'
+    | '/painel'
+    | '/recebimentos'
+    | '/vendas'
+    | '/veiculos/$placa'
+    | '/veiculos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/painel' | '/vendas' | '/veiculos/$placa' | '/veiculos'
+  to:
+    | '/'
+    | '/auth'
+    | '/painel'
+    | '/recebimentos'
+    | '/vendas'
+    | '/veiculos/$placa'
+    | '/veiculos'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/painel'
+    | '/_authenticated/recebimentos'
     | '/_authenticated/vendas'
     | '/_authenticated/veiculos/$placa'
     | '/_authenticated/veiculos/'
@@ -133,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPainelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/recebimentos': {
+      id: '/_authenticated/recebimentos'
+      path: '/recebimentos'
+      fullPath: '/recebimentos'
+      preLoaderRoute: typeof AuthenticatedRecebimentosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/vendas': {
       id: '/_authenticated/vendas'
       path: '/vendas'
@@ -159,6 +190,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedRecebimentosRoute: typeof AuthenticatedRecebimentosRoute
   AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
   AuthenticatedVeiculosPlacaRoute: typeof AuthenticatedVeiculosPlacaRoute
   AuthenticatedVeiculosIndexRoute: typeof AuthenticatedVeiculosIndexRoute
@@ -166,6 +198,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedRecebimentosRoute: AuthenticatedRecebimentosRoute,
   AuthenticatedVendasRoute: AuthenticatedVendasRoute,
   AuthenticatedVeiculosPlacaRoute: AuthenticatedVeiculosPlacaRoute,
   AuthenticatedVeiculosIndexRoute: AuthenticatedVeiculosIndexRoute,
