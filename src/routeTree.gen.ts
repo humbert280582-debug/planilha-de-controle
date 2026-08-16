@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
 import { Route as AuthenticatedVeiculosIndexRouteImport } from './routes/_authenticated/veiculos.index'
 import { Route as AuthenticatedVeiculosPlacaRouteImport } from './routes/_authenticated/veiculos.$placa'
 
@@ -35,6 +36,11 @@ const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   path: '/painel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVendasRoute = AuthenticatedVendasRouteImport.update({
+  id: '/vendas',
+  path: '/vendas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedVeiculosIndexRoute =
   AuthenticatedVeiculosIndexRouteImport.update({
     id: '/veiculos/',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/vendas': typeof AuthenticatedVendasRoute
   '/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
   '/veiculos/': typeof AuthenticatedVeiculosIndexRoute
 }
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/vendas': typeof AuthenticatedVendasRoute
   '/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
   '/veiculos': typeof AuthenticatedVeiculosIndexRoute
 }
@@ -68,20 +76,23 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/vendas': typeof AuthenticatedVendasRoute
   '/_authenticated/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
   '/_authenticated/veiculos/': typeof AuthenticatedVeiculosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/painel' | '/veiculos/$placa' | '/veiculos/'
+  fullPaths:
+    '/' | '/auth' | '/painel' | '/vendas' | '/veiculos/$placa' | '/veiculos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/painel' | '/veiculos/$placa' | '/veiculos'
+  to: '/' | '/auth' | '/painel' | '/vendas' | '/veiculos/$placa' | '/veiculos'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/painel'
+    | '/_authenticated/vendas'
     | '/_authenticated/veiculos/$placa'
     | '/_authenticated/veiculos/'
   fileRoutesById: FileRoutesById
@@ -122,6 +133,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPainelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/vendas': {
+      id: '/_authenticated/vendas'
+      path: '/vendas'
+      fullPath: '/vendas'
+      preLoaderRoute: typeof AuthenticatedVendasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/veiculos/': {
       id: '/_authenticated/veiculos/'
       path: '/veiculos'
@@ -141,12 +159,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
   AuthenticatedVeiculosPlacaRoute: typeof AuthenticatedVeiculosPlacaRoute
   AuthenticatedVeiculosIndexRoute: typeof AuthenticatedVeiculosIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedVendasRoute: AuthenticatedVendasRoute,
   AuthenticatedVeiculosPlacaRoute: AuthenticatedVeiculosPlacaRoute,
   AuthenticatedVeiculosIndexRoute: AuthenticatedVeiculosIndexRoute,
 }
