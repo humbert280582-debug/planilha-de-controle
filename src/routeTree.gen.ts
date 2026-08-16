@@ -10,33 +10,159 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedClientesRouteImport } from './routes/_authenticated/clientes'
+import { Route as AuthenticatedImpedimentosRouteImport } from './routes/_authenticated/impedimentos'
+import { Route as AuthenticatedLicenciamentoRouteImport } from './routes/_authenticated/licenciamento'
+import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedRecebimentosRouteImport } from './routes/_authenticated/recebimentos'
+import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
+import { Route as AuthenticatedVeiculosIndexRouteImport } from './routes/_authenticated/veiculos.index'
+import { Route as AuthenticatedVeiculosPlacaRouteImport } from './routes/_authenticated/veiculos.$placa'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedClientesRoute = AuthenticatedClientesRouteImport.update({
+  id: '/clientes',
+  path: '/clientes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedImpedimentosRoute =
+  AuthenticatedImpedimentosRouteImport.update({
+    id: '/impedimentos',
+    path: '/impedimentos',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLicenciamentoRoute =
+  AuthenticatedLicenciamentoRouteImport.update({
+    id: '/licenciamento',
+    path: '/licenciamento',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
+  id: '/painel',
+  path: '/painel',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRecebimentosRoute =
+  AuthenticatedRecebimentosRouteImport.update({
+    id: '/recebimentos',
+    path: '/recebimentos',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVendasRoute = AuthenticatedVendasRouteImport.update({
+  id: '/vendas',
+  path: '/vendas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedVeiculosIndexRoute =
+  AuthenticatedVeiculosIndexRouteImport.update({
+    id: '/veiculos/',
+    path: '/veiculos/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVeiculosPlacaRoute =
+  AuthenticatedVeiculosPlacaRouteImport.update({
+    id: '/veiculos/$placa',
+    path: '/veiculos/$placa',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/clientes': typeof AuthenticatedClientesRoute
+  '/impedimentos': typeof AuthenticatedImpedimentosRoute
+  '/licenciamento': typeof AuthenticatedLicenciamentoRoute
+  '/painel': typeof AuthenticatedPainelRoute
+  '/recebimentos': typeof AuthenticatedRecebimentosRoute
+  '/vendas': typeof AuthenticatedVendasRoute
+  '/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
+  '/veiculos/': typeof AuthenticatedVeiculosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/clientes': typeof AuthenticatedClientesRoute
+  '/impedimentos': typeof AuthenticatedImpedimentosRoute
+  '/licenciamento': typeof AuthenticatedLicenciamentoRoute
+  '/painel': typeof AuthenticatedPainelRoute
+  '/recebimentos': typeof AuthenticatedRecebimentosRoute
+  '/vendas': typeof AuthenticatedVendasRoute
+  '/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
+  '/veiculos': typeof AuthenticatedVeiculosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/clientes': typeof AuthenticatedClientesRoute
+  '/_authenticated/impedimentos': typeof AuthenticatedImpedimentosRoute
+  '/_authenticated/licenciamento': typeof AuthenticatedLicenciamentoRoute
+  '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/recebimentos': typeof AuthenticatedRecebimentosRoute
+  '/_authenticated/vendas': typeof AuthenticatedVendasRoute
+  '/_authenticated/veiculos/$placa': typeof AuthenticatedVeiculosPlacaRoute
+  '/_authenticated/veiculos/': typeof AuthenticatedVeiculosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/clientes'
+    | '/impedimentos'
+    | '/licenciamento'
+    | '/painel'
+    | '/recebimentos'
+    | '/vendas'
+    | '/veiculos/$placa'
+    | '/veiculos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/clientes'
+    | '/impedimentos'
+    | '/licenciamento'
+    | '/painel'
+    | '/recebimentos'
+    | '/vendas'
+    | '/veiculos/$placa'
+    | '/veiculos'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/clientes'
+    | '/_authenticated/impedimentos'
+    | '/_authenticated/licenciamento'
+    | '/_authenticated/painel'
+    | '/_authenticated/recebimentos'
+    | '/_authenticated/vendas'
+    | '/_authenticated/veiculos/$placa'
+    | '/_authenticated/veiculos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +174,108 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/clientes': {
+      id: '/_authenticated/clientes'
+      path: '/clientes'
+      fullPath: '/clientes'
+      preLoaderRoute: typeof AuthenticatedClientesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/impedimentos': {
+      id: '/_authenticated/impedimentos'
+      path: '/impedimentos'
+      fullPath: '/impedimentos'
+      preLoaderRoute: typeof AuthenticatedImpedimentosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/licenciamento': {
+      id: '/_authenticated/licenciamento'
+      path: '/licenciamento'
+      fullPath: '/licenciamento'
+      preLoaderRoute: typeof AuthenticatedLicenciamentoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/painel': {
+      id: '/_authenticated/painel'
+      path: '/painel'
+      fullPath: '/painel'
+      preLoaderRoute: typeof AuthenticatedPainelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/recebimentos': {
+      id: '/_authenticated/recebimentos'
+      path: '/recebimentos'
+      fullPath: '/recebimentos'
+      preLoaderRoute: typeof AuthenticatedRecebimentosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/vendas': {
+      id: '/_authenticated/vendas'
+      path: '/vendas'
+      fullPath: '/vendas'
+      preLoaderRoute: typeof AuthenticatedVendasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/veiculos/': {
+      id: '/_authenticated/veiculos/'
+      path: '/veiculos'
+      fullPath: '/veiculos/'
+      preLoaderRoute: typeof AuthenticatedVeiculosIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/veiculos/$placa': {
+      id: '/_authenticated/veiculos/$placa'
+      path: '/veiculos/$placa'
+      fullPath: '/veiculos/$placa'
+      preLoaderRoute: typeof AuthenticatedVeiculosPlacaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedClientesRoute: typeof AuthenticatedClientesRoute
+  AuthenticatedImpedimentosRoute: typeof AuthenticatedImpedimentosRoute
+  AuthenticatedLicenciamentoRoute: typeof AuthenticatedLicenciamentoRoute
+  AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedRecebimentosRoute: typeof AuthenticatedRecebimentosRoute
+  AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
+  AuthenticatedVeiculosPlacaRoute: typeof AuthenticatedVeiculosPlacaRoute
+  AuthenticatedVeiculosIndexRoute: typeof AuthenticatedVeiculosIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedClientesRoute: AuthenticatedClientesRoute,
+  AuthenticatedImpedimentosRoute: AuthenticatedImpedimentosRoute,
+  AuthenticatedLicenciamentoRoute: AuthenticatedLicenciamentoRoute,
+  AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedRecebimentosRoute: AuthenticatedRecebimentosRoute,
+  AuthenticatedVendasRoute: AuthenticatedVendasRoute,
+  AuthenticatedVeiculosPlacaRoute: AuthenticatedVeiculosPlacaRoute,
+  AuthenticatedVeiculosIndexRoute: AuthenticatedVeiculosIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
