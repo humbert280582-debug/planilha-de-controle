@@ -14,7 +14,321 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      clients: {
+        Row: {
+          acquisitions: number | null
+          address: string | null
+          broker: string | null
+          contact: string | null
+          created_at: string
+          email: string | null
+          id: string
+          legal_name: string | null
+          short_name: string
+          totvs_code: string | null
+          updated_at: string
+        }
+        Insert: {
+          acquisitions?: number | null
+          address?: string | null
+          broker?: string | null
+          contact?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          legal_name?: string | null
+          short_name: string
+          totvs_code?: string | null
+          updated_at?: string
+        }
+        Update: {
+          acquisitions?: number | null
+          address?: string | null
+          broker?: string | null
+          contact?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          legal_name?: string | null
+          short_name?: string
+          totvs_code?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      impediments: {
+        Row: {
+          bank_court: string | null
+          contract_process: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          plate: string
+          updated_at: string
+        }
+        Insert: {
+          bank_court?: string | null
+          contract_process?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          plate: string
+          updated_at?: string
+        }
+        Update: {
+          bank_court?: string | null
+          contract_process?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          plate?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      licensing: {
+        Row: {
+          created_at: string
+          id: string
+          last_licensing: string | null
+          plate: string
+          plate_final: string | null
+          term: string | null
+          uf: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_licensing?: string | null
+          plate: string
+          plate_final?: string | null
+          term?: string | null
+          uf?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_licensing?: string | null
+          plate?: string
+          plate_final?: string | null
+          term?: string | null
+          uf?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      receipts: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          plate: string
+          received_at: string | null
+          source: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          id?: string
+          plate: string
+          received_at?: string | null
+          source?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          plate?: string
+          received_at?: string | null
+          source?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sales: {
+        Row: {
+          amount: number | null
+          buyer: string | null
+          created_at: string
+          id: string
+          invoice: string | null
+          notes: string | null
+          plate: string
+          status: string | null
+          transfer_client: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount?: number | null
+          buyer?: string | null
+          created_at?: string
+          id?: string
+          invoice?: string | null
+          notes?: string | null
+          plate: string
+          status?: string | null
+          transfer_client?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number | null
+          buyer?: string | null
+          created_at?: string
+          id?: string
+          invoice?: string | null
+          notes?: string | null
+          plate?: string
+          status?: string | null
+          transfer_client?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      vehicle_implements: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          invoice: string | null
+          plate: string
+          specification: string | null
+          supplier: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          invoice?: string | null
+          plate: string
+          specification?: string | null
+          supplier?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          invoice?: string | null
+          plate?: string
+          specification?: string | null
+          supplier?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      vehicles: {
+        Row: {
+          axles: string | null
+          body_type: string | null
+          brand: string | null
+          capacity: string | null
+          category: string | null
+          chassis: string | null
+          cmt: string | null
+          color: string | null
+          created_at: string
+          displacement: string | null
+          dut_crv: string | null
+          engine: string | null
+          fab_mod: string | null
+          fipe_code: string | null
+          fipe_detail: string | null
+          fuel: string | null
+          id: string
+          model: string | null
+          owner_document: string | null
+          owner_name: string | null
+          pbt: string | null
+          plate: string
+          power_cv: string | null
+          product_code: string | null
+          product_desc: string | null
+          renavam: string | null
+          seating: string | null
+          species: string | null
+          status: string | null
+          tank_liters: number | null
+          uf: string | null
+          updated_at: string
+          vehicle_type: string | null
+        }
+        Insert: {
+          axles?: string | null
+          body_type?: string | null
+          brand?: string | null
+          capacity?: string | null
+          category?: string | null
+          chassis?: string | null
+          cmt?: string | null
+          color?: string | null
+          created_at?: string
+          displacement?: string | null
+          dut_crv?: string | null
+          engine?: string | null
+          fab_mod?: string | null
+          fipe_code?: string | null
+          fipe_detail?: string | null
+          fuel?: string | null
+          id?: string
+          model?: string | null
+          owner_document?: string | null
+          owner_name?: string | null
+          pbt?: string | null
+          plate: string
+          power_cv?: string | null
+          product_code?: string | null
+          product_desc?: string | null
+          renavam?: string | null
+          seating?: string | null
+          species?: string | null
+          status?: string | null
+          tank_liters?: number | null
+          uf?: string | null
+          updated_at?: string
+          vehicle_type?: string | null
+        }
+        Update: {
+          axles?: string | null
+          body_type?: string | null
+          brand?: string | null
+          capacity?: string | null
+          category?: string | null
+          chassis?: string | null
+          cmt?: string | null
+          color?: string | null
+          created_at?: string
+          displacement?: string | null
+          dut_crv?: string | null
+          engine?: string | null
+          fab_mod?: string | null
+          fipe_code?: string | null
+          fipe_detail?: string | null
+          fuel?: string | null
+          id?: string
+          model?: string | null
+          owner_document?: string | null
+          owner_name?: string | null
+          pbt?: string | null
+          plate?: string
+          power_cv?: string | null
+          product_code?: string | null
+          product_desc?: string | null
+          renavam?: string | null
+          seating?: string | null
+          species?: string | null
+          status?: string | null
+          tank_liters?: number | null
+          uf?: string | null
+          updated_at?: string
+          vehicle_type?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
