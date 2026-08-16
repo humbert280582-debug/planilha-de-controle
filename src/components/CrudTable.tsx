@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Plus, Search, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-import { supabase } from "@/integrations/supabase/client";
+import { db } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -93,7 +93,7 @@ export function CrudTable({
   const { data = [], isLoading } = useQuery({
     queryKey,
     queryFn: async () => {
-      let q = supabase.from(table).select("*").order(orderBy, { ascending: true });
+      let q = db.from(table).select("*").order(orderBy, { ascending: true });
       if (fixedValues) {
         for (const [k, v] of Object.entries(fixedValues)) q = q.eq(k, v as string);
       }
@@ -111,11 +111,11 @@ export function CrudTable({
         if (raw === undefined || raw === "") payload[field.key] = field.type === "number" ? null : null;
         else payload[field.key] = field.type === "number" ? Number(raw) : raw;
       }
-      if (editing?.id) {
-        const { error } = await supabase.from(table).update(payload).eq("id", editing.id as string);
+      if (editing?.['id']) {
+        const { error } = await db.from(table).update(payload).eq("id", editing['id'] as string);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from(table).insert(payload);
+        const { error } = await db.from(table).insert(payload);
         if (error) throw error;
       }
     },
@@ -130,7 +130,7 @@ export function CrudTable({
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from(table).delete().eq("id", id);
+      const { error } = await db.from(table).delete().eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -211,7 +211,7 @@ export function CrudTable({
               </TableRow>
             ) : (
               filtered.map((row) => (
-                <TableRow key={String(row.id)}>
+                <TableRow key={String(row['id'])}>
                   {columns.map((c) => (
                     <TableCell key={c.key} className={c.className}>
                       {c.render ? c.render(row) : fmtText(row[c.key])}
@@ -225,7 +225,7 @@ export function CrudTable({
                       variant="ghost"
                       size="icon"
                       aria-label="Excluir"
-                      onClick={() => setDeleteId(String(row.id))}
+                      onClick={() => setDeleteId(String(row['id']))}
                     >
                       <Trash2 className="h-4 w-4 text-destructive" />
                     </Button>
