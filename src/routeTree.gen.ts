@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedLicenciamentoRouteImport } from './routes/_authenticated/licenciamento'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedRecebimentosRouteImport } from './routes/_authenticated/recebimentos'
 import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
@@ -32,6 +33,12 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedLicenciamentoRoute =
+  AuthenticatedLicenciamentoRouteImport.update({
+    id: '/licenciamento',
+    path: '/licenciamento',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
@@ -64,6 +71,7 @@ const AuthenticatedVeiculosPlacaRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/licenciamento': typeof AuthenticatedLicenciamentoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/recebimentos': typeof AuthenticatedRecebimentosRoute
   '/vendas': typeof AuthenticatedVendasRoute
@@ -73,6 +81,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/licenciamento': typeof AuthenticatedLicenciamentoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/recebimentos': typeof AuthenticatedRecebimentosRoute
   '/vendas': typeof AuthenticatedVendasRoute
@@ -84,6 +93,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/licenciamento': typeof AuthenticatedLicenciamentoRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/recebimentos': typeof AuthenticatedRecebimentosRoute
   '/_authenticated/vendas': typeof AuthenticatedVendasRoute
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/licenciamento'
     | '/painel'
     | '/recebimentos'
     | '/vendas'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/licenciamento'
     | '/painel'
     | '/recebimentos'
     | '/vendas'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/licenciamento'
     | '/_authenticated/painel'
     | '/_authenticated/recebimentos'
     | '/_authenticated/vendas'
@@ -149,6 +162,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/licenciamento': {
+      id: '/_authenticated/licenciamento'
+      path: '/licenciamento'
+      fullPath: '/licenciamento'
+      preLoaderRoute: typeof AuthenticatedLicenciamentoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
@@ -189,6 +209,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedLicenciamentoRoute: typeof AuthenticatedLicenciamentoRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedRecebimentosRoute: typeof AuthenticatedRecebimentosRoute
   AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
@@ -197,6 +218,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedLicenciamentoRoute: AuthenticatedLicenciamentoRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedRecebimentosRoute: AuthenticatedRecebimentosRoute,
   AuthenticatedVendasRoute: AuthenticatedVendasRoute,
